@@ -9,9 +9,9 @@ import Card from "../components/Card";
 const NASA_URL = "https://images-api.nasa.gov/search?q=galaxy";
 
 const Container = styled.div`
-width: 100%;
-justify-content: center;
-display: center;
+  width: 100%;
+  justify-content: center;
+  display: center;
 `;
 
 const Home: React.FC = () => {
@@ -19,8 +19,7 @@ const Home: React.FC = () => {
   const { data, error } = useSWR(NASA_URL, { fetcher });
 
   if (error) return <div>Error fetching images!</div>;
-  if (!data) return <LinearProgress />
-  ;
+  if (!data) return <LinearProgress />;
 
   const imageList = data.collection.items.map(
     (data: GalaxyObject, key: number) => {
@@ -35,17 +34,25 @@ const Home: React.FC = () => {
       );
     }
   );
- 
+
   return (
     <Container>
-      <h1 style={{textAlign: "center"}}>Spacestagram</h1>
-      <h5   style={{textAlign: "center"}}   
->
-  Brought to you by the NASA Image and Video Library!</h5>
-  <div style={{width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-      {imageList}
+      <h1 style={{ textAlign: "center" }}>Spacestagram</h1>
+      <h5 style={{ textAlign: "center" }}>
+        Brought to you by the NASA Image and Video Library!
+      </h5>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {imageList}
       </div>
-      </Container>
+    </Container>
   );
 };
 
