@@ -5,13 +5,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import "./App.css";
 
-const defaultFetcher = (
+const defaultFetcher = async (
   input: RequestInfo,
-  init?: RequestInit
-): Promise<unknown> =>
-  fetch(input, init)
-    .then((res) => res.json())
-    .then(({ payload }) => payload);
+  init: RequestInit,
+) => {
+  const result = await fetch(input, init);
+  return result.json();
+};
 
 const App = () => {
   return (
