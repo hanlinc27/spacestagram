@@ -1,5 +1,8 @@
 import React from "react";
-import { MediaCard } from "@shopify/polaris";
+import { Card, CardMedia, CardHeader, CardContent, Typography, IconButton, Tooltip } from '@material-ui/core';
+import FileCopy from '@material-ui/icons/FileCopy';
+import Heart from "react-animated-heart";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 interface CardProps {
   title: string;
@@ -9,35 +12,57 @@ interface CardProps {
   tags?: string[];
 }
 
-const Card: React.FC<CardProps> = ({ title, imageURL, description }) => {
+const ImageCard: React.FC<CardProps> = ({ title, imageURL, description, dateCreated }) => {
   const [liked, setLiked] = React.useState(false);
+  const [copiedLink, setCopiedLink] = React.useState("");
+
+  const date = new Date(dateCreated).toDateString();
 
   return (
-    <>
-      <MediaCard
-        title={title}
-        description={description}
-        primaryAction={{
-          content: liked ? "Unlike" : "Like",
-          onAction: () => {
-            setLiked(!liked);
-          },
-        }}
-        size="small"
-      >
-        <img
-          alt=""
-          width="40%"
-          height="100%"
-          style={{
-            objectFit: "cover",
-            objectPosition: "center",
-          }}
-          src={imageURL}
-        ></img>
-      </MediaCard>
-    </>
+    <Card style={{maxWidth: 400, marginTop: 15}}>
+      <CardHeader
+      title={title}
+      subheader={date}
+      />
+
+      <CardMedia
+      component="img"
+      height="200"
+      image={imageURL}
+      alt={title}
+     />
+
+    <CardContent style={{paddingBottom: "0px"}} >
+    <Typography
+    
+    align="left"
+    color="textSecondary"
+    display="block"
+    >
+      {description}
+    </Typography>
+    <div style={{display: "flex", marginLeft: "-30px"}}>
+    <Heart isClick={liked} onClick={()=>setLiked(!liked)}/>
+
+<CopyToClipboard
+text={imageURL}
+onCopy={()=>setCopiedLink(imageURL)}
+>
+<Tooltip title={copiedLink === imageURL ? "Copied image link!" : "Copy to clipboard"}>
+    
+    <IconButton aria-label="share" 
+    style={{marginLeft: "-20px"}}
+    >
+          <FileCopy />
+        </IconButton>
+
+
+        </Tooltip>
+        </CopyToClipboard>
+        </div>
+    </CardContent>
+    </Card>
   );
 };
 
-export default Card;
+export default ImageCard;
