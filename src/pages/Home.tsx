@@ -1,18 +1,11 @@
 import React from "react";
 import useSWR, { useSWRConfig } from "swr";
-import styled from "styled-components";
 import { LinearProgress } from "@material-ui/core";
 
 import { GalaxyObject } from "./types";
 import Card from "../components/Card";
 
 const NASA_URL = "https://images-api.nasa.gov/search?q=galaxy";
-
-const Container = styled.div`
-  width: 100%;
-  justify-content: center;
-  display: center;
-`;
 
 const Home: React.FC = () => {
   const { fetcher } = useSWRConfig();
@@ -36,7 +29,7 @@ const Home: React.FC = () => {
   );
 
   return (
-    <Container>
+    <React.Fragment>
       <h1 style={{ textAlign: "center" }}>Spacestagram</h1>
       <h5 style={{ textAlign: "center" }}>
         Brought to you by the NASA Image and Video Library!
@@ -52,7 +45,7 @@ const Home: React.FC = () => {
       >
         {imageList}
       </div>
-    </Container>
+      </React.Fragment>
   );
 };
 
