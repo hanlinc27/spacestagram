@@ -51,4 +51,5 @@ This software uses the following open source packages:
 - [Styled components](https://github.com/styled-components/styled-components)
 - [SWR React Hooks](https://github.com/vercel/swr) 
 - [React Animated Heart](https://github.com/ShaunLWM/react-animated-heart)
+- [React Copy to Clipboard](https://www.npmjs.com/package/react-copy-to-clipboard)
 
